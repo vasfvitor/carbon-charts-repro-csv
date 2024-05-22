@@ -1,24 +1,43 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import "@carbon/charts/styles.css";
+import { StackedBarChart } from "@carbon/charts";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
+    <div id="my-bar-chart"></div>
   </div>
-`
+`;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const chartHolder = document.getElementById("my-bar-chart") as HTMLDivElement;
+
+new StackedBarChart(chartHolder, {
+  data: [
+    {
+      group: "Imãs",
+      value: 65000,
+    },
+    {
+      group: "Íons",
+      value: 29123,
+    },
+    {
+      group: "Você",
+      value: 35213,
+    },
+    {
+      group: "Ação",
+      value: 51213,
+    },
+  ],
+  options: {
+    axes: {
+      left: {
+        mapsTo: "value",
+      },
+      bottom: {
+        mapsTo: "group",
+        scaleType: "labels",
+      },
+    },
+    height: "400px",
+  },
+});
